@@ -1,5 +1,6 @@
 export {
-    loginUserInit,
+    logOutUserInit,
+    logInUserInit,
     onGetAllUsersInit
  } from './Login';
     

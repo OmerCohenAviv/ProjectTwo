@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
-import LoginUI from '../../components/Login/LoginUI';
-import * as actions from '../../store/actions/index';
+import { Redirect } from 'react-router-dom'
+import LoginUI from '../../../components/User/Login/LoginUI';
+import * as actions from '../../../store/actions/index';
 
 
 class Login extends Component {
@@ -33,6 +34,9 @@ class Login extends Component {
                     allUsers={this.props.allUsers} />
             );
         };
+        if (this.props.userStatus) {
+            displayLogin = <Redirect to= '/' />
+        };
         return (
             <div>
                 {displayLogin}
@@ -45,12 +49,13 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.Login.loading,
-        allUsers: state.Login.allUsers
+        allUsers: state.Login.allUsers,
+        userStatus: state.Login.loggedUser !== null
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onLoginUser: (user) => dispatch(actions.loginUserInit(user))
+        onLoginUser: (user) => dispatch(actions.logInUserInit(user))
     };
 };
 

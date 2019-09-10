@@ -14,6 +14,7 @@ const LoginReducer = (state = initalState, action) => {
         case(actionTypes.GET_ALL_USERS_FAIL):    { return updateObject( state, {loading: false} ) }
 
         case(actionTypes.LOGIN_USER):    { return updateObject(state,{ loggedUser: action.user} ) }
+        case(actionTypes.LOGOUT_USER):   { return updateObject(state, { loggedUser: null})}
         default: return state;
     };
 };

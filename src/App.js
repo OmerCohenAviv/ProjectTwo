@@ -2,8 +2,11 @@ import React, { Component  } from 'react';
 import './App.css';
 
 import { connect } from 'react-redux'
-import Login from './containers/Login/Login';
+import Login from './containers/User/Login/Login';
+import Logout from './containers/User/Logout/Logout'
+import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions/index';
+import { Route, Switch} from 'react-router-dom'
 
 class  App extends Component  {
   componentDidMount() {
@@ -11,10 +14,16 @@ class  App extends Component  {
   };
   
   render () {
+    const routes = (
+      <Switch>
+        <Route path='/login' component={Login}  exact/>
+        <Route path='/logout' component={Logout}  exact/>
+      </Switch>
+    );
     return (
-      <div className="App">
-      <Login />
-    </div>
+      <Layout>
+        {routes}
+      </Layout>
     );
   };
 };
