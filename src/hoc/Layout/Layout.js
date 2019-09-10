@@ -7,8 +7,8 @@ class Layout extends Component {
     render() {
         return (
             <div>
-                <Toolbar  userStatus={this.props.userStatus}/>
-                <main>
+                <Toolbar userStatus={this.props.userStatus}/>
+                <main style={{marginTop:'32px'}}>
                     {this.props.children }
                 </main>
             </div>
@@ -18,7 +18,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-        userStatus: state.Login.loggedUser !== null
+        userStatus: state.User.loggedUser 
     };
 };
 

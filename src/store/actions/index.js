@@ -2,5 +2,8 @@ export {
     logOutUserInit,
     logInUserInit,
     onGetAllUsersInit
- } from './Login';
+ } from './User';
     
+ export {
+    setAllUsersQuestionsInit
+ } from './Home'

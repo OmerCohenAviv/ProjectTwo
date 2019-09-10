@@ -8,10 +8,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider} from 'react-redux';
 import thunk  from 'redux-thunk'
-import LoginReducer from './store/reducers/Login';
+import UserReducer from './store/reducers/User';
+import HomeReducer from './store/reducers/Home';
 
 const rootReducer = combineReducers({
-    Login: LoginReducer,
+    User: UserReducer,
+    Home: HomeReducer
 });
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 

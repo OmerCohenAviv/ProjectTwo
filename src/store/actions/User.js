@@ -22,8 +22,8 @@ export const onGetAllUsersInit = () => {
 };
 
 
-export const logInUserInit = (user) => {
-    return {type: actionTypes.LOGIN_USER, user: user}
+export const logInUserInit = (user, allQuestions) => {
+    return {type: actionTypes.LOGIN_USER, user: user, allQuestions: allQuestions}
 };
 
 export const logOutUserInit = () => {

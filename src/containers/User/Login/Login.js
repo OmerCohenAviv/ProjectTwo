@@ -19,7 +19,7 @@ class Login extends Component {
         const userToBeLogged = this.props.allUsers.filter(user => {
             return user.id === this.state.user
         });
-        this.props.onLoginUser(userToBeLogged)
+        this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
     };
     render() {
         let displayLogin = (
@@ -48,14 +48,15 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.Login.loading,
-        allUsers: state.Login.allUsers,
-        userStatus: state.Login.loggedUser !== null
+        allQuestions: state.Home.allQuestions,
+        loading: state.User.loading,
+        allUsers: state.User.allUsers,
+        userStatus: state.User.loggedUser !== null
     };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onLoginUser: (user) => dispatch(actions.logInUserInit(user))
+        onLoginUser: (user, allQuestions) => dispatch(actions.logInUserInit(user, allQuestions))
     };
 };
 

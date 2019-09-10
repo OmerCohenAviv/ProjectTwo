@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+
+import { Card, Button, Form } from 'react-bootstrap'
 
 const loginUI = (props) => {
     const { allUsers } = props
@@ -11,13 +13,25 @@ const loginUI = (props) => {
     });
 
     return (
-        <form onSubmit={props.clickedLog}>
-            <select value={props.userToBeLogged} onChange={props.changeUser}>
-                <option defaultValue hidden>Choose User</option>
-                {displayUsers}
-            </select>
-            <button >Submit</button>
-        </form>
+        <Fragment>
+            <Card style={{ width: '18rem',margin:'0 auto'}}>
+                <Card.Body>
+                    <Card.Title>Select User</Card.Title>
+                        <Form >
+                            <select value={props.userToBeLogged} onChange={props.changeUser} >
+                                <option defaultValue hidden>Choose User</option>
+                                {displayUsers}
+                            </select>
+                            <Button
+                                disabled={props.userToBeLogged === ''}
+                                onClick={props.clickedLog}
+                                style={{ marginTop: '10px', display: 'flex' }}>
+                                Submit
+                             </Button>
+                        </Form>
+                </Card.Body>
+            </Card>
+        </Fragment>
     );
 };
 
