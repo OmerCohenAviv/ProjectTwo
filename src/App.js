@@ -33,7 +33,7 @@ class  App extends Component  {
 
 const mapDispatchToProps = dispatch => {
   return {
-      onGetAllUsersInit: () => dispatch( actions.onGetAllUsersInit() ),
+      onGetAllUsersInit: () => dispatch( actions.setAllUsersInit() ),
       onSetAllQuestions: () => dispatch(actions.setAllUsersQuestionsInit())
   };
 };

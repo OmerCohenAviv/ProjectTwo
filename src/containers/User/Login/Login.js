@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import LoginUI from '../../../components/User/Login/LoginUI';
 import * as actions from '../../../store/actions/index';
+import {Spinner} from 'react-bootstrap'
 
 
 class Login extends Component {
@@ -11,7 +12,6 @@ class Login extends Component {
         user: ''
     };
     selectUserHandler = (event) => {
-        console.log(event.target.value)
         this.setState({ user: event.target.value })
     };
     onLoginHandler = (event) => {
@@ -23,7 +23,7 @@ class Login extends Component {
     };
     render() {
         let displayLogin = (
-            <p>Spinner....</p>
+            <Spinner animation="border" />
         );
         if (this.props.allUsers) {
             displayLogin = (
@@ -34,9 +34,11 @@ class Login extends Component {
                     allUsers={this.props.allUsers} />
             );
         };
-        if (this.props.userStatus) {
+        if (this.props.loggedUser) {
             displayLogin = <Redirect to= '/' />
         };
+
+
         return (
             <div>
                 {displayLogin}
@@ -49,9 +51,9 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         allQuestions: state.Home.allQuestions,
+        allUsers: state.Home.allUsers,
         loading: state.User.loading,
-        allUsers: state.User.allUsers,
-        userStatus: state.User.loggedUser !== null
+        loggedUser: state.User.loggedUser !== null
     };
 };
 const mapDispatchToProps = dispatch => {
