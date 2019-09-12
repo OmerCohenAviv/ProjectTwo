@@ -12,7 +12,7 @@ const questionUI = (props) => {
                 <Card.Text>
                     optionOne - {question.optionOne.text}
                   </Card.Text>
-                <Button variant="primary" >Watch Full Poll</Button>
+                <Button variant="primary" onClick={() => props.showFullPoll(question)} >Watch Full Poll</Button>
             </Card.Body>
         </Card>
     );

@@ -22,7 +22,6 @@ const toolbar = (props) => {
             </Nav.Item>
         </Nav>
     );
-    console.log(props.userStatus)
     if (props.userStatus) {
         logStatus = (
             <Fragment>
@@ -32,7 +31,7 @@ const toolbar = (props) => {
                     </NavLink>
                 </Nav.Item>
                 <Nav.Item style={{ marginLeft: '7px' }} >
-                    <NavLink to='/logout'>
+                    <NavLink to='/'>
                         <Button variant="primary" >{props.userStatus.name}</Button>
                     </NavLink>
                 </Nav.Item>
