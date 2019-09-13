@@ -4,6 +4,7 @@ import QuestionsUI from '../../components/Questions/QuestionsUI';
 import * as actions from '../../store/actions/index';
 import FullQuestion from '../../components/Questions/FullQuestion/FullQuestion';
 import { connect } from 'react-redux';
+import { Spinner } from 'react-bootstrap'
 
 
 class Home extends Component {
@@ -21,9 +22,8 @@ class Home extends Component {
             });
             this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
             this.setState({ submitAnswer: false })
-        }
+        };
     };
-
     showAnswersHandler = () => {
         this.setState(prevState => ({ showAnswers: !prevState.showAnswers }))
     };
@@ -36,10 +36,8 @@ class Home extends Component {
         this.setState({ showFullPoll: false, questionID: '' })
     };
     chooseOptionHandler = (option) => {
-        console.log(typeof (option))
         this.setState({ chooseOption: option })
     };
-
     saveQuestionHandler = (qID) => {
         const questionInfo = {
             authedUser: this.props.loggedUser.id,
@@ -69,6 +67,7 @@ class Home extends Component {
         if (this.state.showFullPoll) {
             allQuestions = (
                 <FullQuestion
+                    user={this.props.loggedUser}
                     submitAnswer={this.state.submitAnswer}
                     chooseOption={this.chooseOptionHandler}
                     saveQuestion={this.saveQuestionHandler}
@@ -77,6 +76,9 @@ class Home extends Component {
                     question={this.state.questionShowed} />
             );
         };
+        if(this.props.loading) {
+            allQuestions = <Spinner animation="border" role="status"/>
+        }
         return (
             <div>
                 {allQuestions}
@@ -104,7 +106,5 @@ const mapDispatchToProps = dispatch => {
         onSaveAnswerInit: (questionInfo) => dispatch(actions.saveQuestionInit(questionInfo))
     };
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

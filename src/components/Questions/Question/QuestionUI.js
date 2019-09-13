@@ -4,9 +4,10 @@ import {Card, Button} from 'react-bootstrap'
 
 const questionUI = (props) => {
     const { userName, question} = props
+    console.log(props)
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Img variant="top" src={props.avatar} />
             <Card.Body>
                 <Card.Title> Asked By - {userName} </Card.Title>
                 <Card.Text>

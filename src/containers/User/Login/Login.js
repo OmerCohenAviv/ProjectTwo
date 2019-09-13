@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import LoginUI from '../../../components/User/Login/LoginUI';
 import * as actions from '../../../store/actions/index';
-import {Spinner} from 'react-bootstrap'
+import { Spinner } from 'react-bootstrap'
 
 
 class Login extends Component {
-    state = {
+    state = { 
         user: ''
     };
+
     selectUserHandler = (event) => {
         this.setState({ user: event.target.value })
     };
@@ -21,10 +22,9 @@ class Login extends Component {
         });
         this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
     };
+
     render() {
-        let displayLogin = (
-            <Spinner animation="border" />
-        );
+        let displayLogin =  <Spinner animation="border" />
         if (this.props.allUsers) {
             displayLogin = (
                 <LoginUI
@@ -34,16 +34,9 @@ class Login extends Component {
                     allUsers={this.props.allUsers} />
             );
         };
-        if (this.props.loggedUser) {
-            displayLogin = <Redirect to= '/' />
-        };
+        if (this.props.loggedUser) { displayLogin = <Redirect to='/' /> }
 
-
-        return (
-            <div>
-                {displayLogin}
-            </div>
-        );
+        return <div> {displayLogin} </div> 
     };
 };
 
@@ -52,14 +45,12 @@ const mapStateToProps = state => {
     return {
         allQuestions: state.Home.allQuestions,
         allUsers: state.Home.allUsers,
-        loading: state.User.loading,
         loggedUser: state.User.loggedUser !== null
     };
 };
+
 const mapDispatchToProps = dispatch => {
-    return {
-        onLoginUser: (user, allQuestions) => dispatch(actions.logInUserInit(user, allQuestions))
-    };
+    return { onLoginUser: (user, allQuestions) => dispatch(actions.logInUserInit(user, allQuestions)) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

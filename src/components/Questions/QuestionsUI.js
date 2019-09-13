@@ -8,10 +8,12 @@ const questionsUI = (props) => {
     const answeredQuestions = [];
     if (!props.showAnswers)
         for (let question of props.notAnsweredQuestions) {
+            const avatar = props.allUsers.filter(user => user.id === question.author)[0].avatarURL
             const userName = props.allUsers.filter(user => user.id === question.author)[0].name
             unAnsweredQuestions.push(
                 <Col sm key={question.id}>
                     <QuestionUI
+                        avatar={avatar}
                         showFullPoll={props.showFullPoll}
                         allUsers={props.allUsers}
                         question={question}
@@ -22,9 +24,11 @@ const questionsUI = (props) => {
     if (props.showAnswers) {
         for (let question of props.answeredQuestions) {
             const userName = props.allUsers.filter(user => user.id === question.author)[0].name
+            const avatar = props.allUsers.filter(user => user.id === question.author)[0].avatarURL
             answeredQuestions.push(
                 <Col sm key={question.id}>
                     <QuestionUI
+                        avatar = {avatar}
                         showFullPoll={props.showFullPoll}
                         allUsers={props.allUsers}
                         question={question}

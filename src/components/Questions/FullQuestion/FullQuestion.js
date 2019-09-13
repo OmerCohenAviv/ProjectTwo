@@ -5,10 +5,11 @@ import { Redirect } from 'react-router-dom'
 
 const fullQuestion = (props) => {
     const { question } = props
+    console.log(props)
     const userName = props.allUsers.filter(user => user.id === question.author)[0].name
     let fullQuestion = (
         <Card bg='info' text='white' style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Img variant="top" src={props.user.avatarURL} />
             <Card.Body>
                 <Card.Title> Asked By - {userName} </Card.Title>
                 <Card.Text as='div'>
@@ -33,7 +34,7 @@ const fullQuestion = (props) => {
         </Card>
     );
     if (props.submitAnswer) {
-        fullQuestion = <div><Redirect to='/' /></div>
+        fullQuestion = <div> <Redirect to='/' /> </div>
     }
     return (
         <div>

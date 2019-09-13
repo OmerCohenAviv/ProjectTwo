@@ -6,20 +6,15 @@ import { Redirect } from 'react-router-dom'
 
 
 class Logout extends Component {
-    componentDidMount() {
-        this.props.logoutUser()
-    }
+    componentDidMount() { this.props.logoutUser() }
+  
     render() {
-        return (
-            <div><Redirect to='/Login'/></div>
-        );
+        return  <div> <Redirect to='/Login'/> </div> 
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {
-        logoutUser: () => dispatch( actions.logOutUserInit() )
-    };
+    return {   logoutUser: () => dispatch( actions.logOutUserInit() ) };
 };
 
 export default connect(null,mapDispatchToProps)(Logout);
