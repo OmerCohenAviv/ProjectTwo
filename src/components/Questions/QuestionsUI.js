@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import QuestionUI from './Question/QuestionUI';
+import AnswerUI from '../Answers/AnswerUI/AnswerUI';
 
 const questionsUI = (props) => {
     const unAnsweredQuestions = [];
@@ -14,7 +15,7 @@ const questionsUI = (props) => {
                 <Col sm key={question.id}>
                     <QuestionUI
                         avatar={avatar}
-                        showFullPoll={props.showFullPoll}
+                        showFullPollFunc={props.showFullPollFunc}
                         allUsers={props.allUsers}
                         question={question}
                         userName={userName} />
@@ -27,30 +28,25 @@ const questionsUI = (props) => {
             const avatar = props.allUsers.filter(user => user.id === question.author)[0].avatarURL
             answeredQuestions.push(
                 <Col sm key={question.id}>
-                    <QuestionUI
-                        avatar = {avatar}
-                        showFullPoll={props.showFullPoll}
+                    <AnswerUI
+                        avatar={avatar}
+                        showFullAnswered={props.showFullAnswered}
                         allUsers={props.allUsers}
                         question={question}
                         userName={userName} />
                 </Col>
             );
         }
-
-
     };
+
     return (
         <Container style={{ display: 'flex' }} >
             <Row style={{ display: 'block' }}>
-                <Col sm style={{ marginBottom: '10px' }}>
-                    <Button onClick={props.clickedAnswers}>unAnswered Questions</Button>
-                </Col>
+                <Button onClick={props.switchQA}  style={{display:'block',margin: '0 auto'}}> Questions</Button>
                 {unAnsweredQuestions}
             </Row>
-            <Row style={{ display: 'block' }}>
-                <Col sm style={{ marginBottom: '10px' }}>
-                    <Button onClick={props.clickedAnswers}>answered Questions</Button>
-                </Col>
+            <Row style={{ display: 'block',marginLeft:'auto' }}>
+                <Button onClick={props.switchQA} style={{display:'block',margin: '0 auto'}}>answered Questions</Button>
                 {answeredQuestions}
             </Row>
         </Container>

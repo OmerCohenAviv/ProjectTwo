@@ -21,7 +21,6 @@ const saveQuestionAnswerSuccess = () => {
 const saveQuestionAnswerFail = () => {
     return { type: actionTypes.SAVE_QUESTION_ANSWER_FAIL }
 };
-
 export const saveQuestionInit = ({ authedUser, qid, answer }) => {
     return dispatch => {
         dispatch(saveQuestionAnswerStart())

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 
-import QuestionsUI from '../../components/Questions/QuestionsUI';
+
 import * as actions from '../../store/actions/index';
-import FullQuestion from '../../components/Questions/FullQuestion/FullQuestion';
 import { connect } from 'react-redux';
 import { Spinner } from 'react-bootstrap'
+import UtilityRenderHome from './HomeUtility/Render'
 
 
 class Home extends Component {
     state = {
         showAnswers: false,
         showFullPoll: false,
+        showFullAnswer: false,
         questionShowed: '',
+        answerShowed: '',
         chooseOption: '',
         submitAnswer: false,
     };
@@ -24,20 +26,25 @@ class Home extends Component {
             this.setState({ submitAnswer: false })
         };
     };
+    //Switch Between Answered Questions/Not answered
     showAnswersHandler = () => {
         this.setState(prevState => ({ showAnswers: !prevState.showAnswers }))
     };
+    //Showing a full poll of unanswered question after clicking
     showFullPollHandler = (questionID) => {
         if (!this.state.showFullPoll) {
             this.setState({ showFullPoll: true, questionShowed: questionID })
         };
     };
+    //Canceling the show of a single question - returning home
     cancelFullPollHandler = () => {
         this.setState({ showFullPoll: false, questionID: '' })
     };
+    //Choosing an option inside a poll
     chooseOptionHandler = (option) => {
         this.setState({ chooseOption: option })
     };
+    //Submiting the Question 
     saveQuestionHandler = (qID) => {
         const questionInfo = {
             authedUser: this.props.loggedUser.id,
@@ -49,41 +56,46 @@ class Home extends Component {
         this.props.onSetAllQuestions()
         this.setState({ submitAnswer: true, showFullPoll: false })
     };
-
+    //Showing Full Answered Poll 
+    showFullAnsweredHandler = (questionID) => {
+        if (!this.state.showFullAnswered) {
+            this.setState({ showFullAnswer: true, answerShowed: questionID })
+        };
+    };
+    //Canceling the full answered poll UI
+    cancelFullAnsweredHandler = () => {
+        this.setState({ showFullAnswer: false, answerShowed: '' })
+    };
 
     render() {
-        let allQuestions = <p>Please Log in First</p>
-        if (this.props.notAnsweredQuestions && this.props.loggedUser) {
-            allQuestions = <QuestionsUI
-                showFullPoll={this.showFullPollHandler}
-                showAnswers={this.state.showAnswers}
-                clickedAnswers={this.showAnswersHandler}
-                allUsers={this.props.allUsers}
-                answeredQuestions={this.props.answeredQuestions}
-                notAnsweredQuestions={this.props.notAnsweredQuestions}
-                user={this.props.loggedUser}
-            />
-        };
-        if (this.state.showFullPoll) {
-            allQuestions = (
-                <FullQuestion
-                    user={this.props.loggedUser}
-                    submitAnswer={this.state.submitAnswer}
-                    chooseOption={this.chooseOptionHandler}
-                    saveQuestion={this.saveQuestionHandler}
-                    allUsers={this.props.allUsers}
-                    cancelFullPoll={this.cancelFullPollHandler}
-                    question={this.state.questionShowed} />
+        let homeUI = <p>Please Log In </p>
+        if (this.props.loading) {
+            homeUI = <Spinner animation="border" role="status" />
+        }
+        if (this.props.loggedUser && !this.props.loading) {
+            homeUI = (
+                <UtilityRenderHome
+                    showFullAnswer={ this.state.showFullAnswer }
+                    user={ this.props.loggedUser }
+                    submitAnswer={ this.state.submitAnswer }
+                    allUsers={ this.props.allUsers }
+                    showAnswers={ this.state.showAnswers }
+                    answerShowed={ this.state.answerShowed}
+                    questionShowed={ this.state.questionShowed }
+                    answeredQuestions={ this.props.answeredQuestions }
+                    notAnsweredQuestions={ this.props.notAnsweredQuestions } 
+                    showFullPoll={ this.state.showFullPoll }
+                    chooseOption={ this.chooseOptionHandler}
+                    cancelFullAnswer = { this.cancelFullAnsweredHandler }
+                    showFullAnswered={ this.showFullAnsweredHandler }
+                    cancelFullPoll={ this.cancelFullPollHandler }
+                    saveQuestion={ this.saveQuestionHandler }
+                    showFullPollFunc={ this.showFullPollHandler }
+                    switchQA={ this.showAnswersHandler  } />
             );
         };
-        if(this.props.loading) {
-            allQuestions = <Spinner animation="border" role="status"/>
-        }
-        return (
-            <div>
-                {allQuestions}
-            </div>
-        );
+
+        return <div>{homeUI}</div>
     };
 };
 
@@ -97,7 +109,6 @@ const mapStateToProps = state => {
         loggedUser: state.User.loggedUser,
     };
 };
-
 const mapDispatchToProps = dispatch => {
     return {
         onLoginUser: (user, allQuestions) => dispatch(actions.logInUserInit(user, allQuestions)),
@@ -106,5 +117,4 @@ const mapDispatchToProps = dispatch => {
         onSaveAnswerInit: (questionInfo) => dispatch(actions.saveQuestionInit(questionInfo))
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

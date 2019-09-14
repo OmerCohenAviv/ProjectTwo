@@ -11,7 +11,6 @@ const initalState = {
 const UserReducer = (state = initalState, action) => {
     switch (action.type) {
         case (actionTypes.LOGIN_USER): {
-            console.log(action)
             const answered = Object.keys(action.user.answers)
             const answeredQuestions =    action.allQuestions.filter(q => answered.includes(q.id))
             const notAnsweredQuestions = action.allQuestions.filter(q => !answered.includes(q.id))

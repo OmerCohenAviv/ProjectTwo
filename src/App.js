@@ -16,12 +16,15 @@ class  App extends Component  {
     this.props.onGetAllUsersInit()
     this.props.onSetAllQuestions()
   };
-  
   render () {
+    if (this.props.unAnsweredQuestions && this.props.answeredQuestions) {
+
+    } 
     const routes = (
       <Switch>
         <Route path='/login' component={Login}  exact/>
         <Route path='/logout' component={Logout}  exact/>
+        <Route path='/questions' component={Home}  />
         <Route path='/leadersboard' component={Leadersboard} exact />
         <Route path='/' component={Home} exact />
       </Switch>
@@ -34,6 +37,12 @@ class  App extends Component  {
   };
 };
 
+const mapStateToProps = state => {
+  return {
+    unAnsweredQuestions: state.User.unAnsweredQuestions,
+    answeredQuestions: state.User.answeredQuestions
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
       onGetAllUsersInit: () => dispatch( actions.setAllUsersInit() ),
@@ -44,5 +53,5 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 

@@ -4,8 +4,8 @@ import { Card, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 
 const fullQuestion = (props) => {
-    const { question } = props
     console.log(props)
+    const { question } = props
     const userName = props.allUsers.filter(user => user.id === question.author)[0].name
     let fullQuestion = (
         <Card bg='info' text='white' style={{ width: '18rem' }}>

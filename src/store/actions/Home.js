@@ -12,7 +12,6 @@ const setAllUsersQuestionsSuccess = (questions) => {
 const setAllUsersQuestionsFail = () => {
     return { type: actionTypes.SET_ALL_USERS_QUESTIONS_FAIL }
 };
-
 export const setAllUsersQuestionsInit = () => {
     return dispatch => {
         dispatch(setAllUsersQuestionsStart())
@@ -21,6 +20,7 @@ export const setAllUsersQuestionsInit = () => {
             .catch(error => dispatch(setAllUsersQuestionsFail(error)))
     };
 };
+
 
 //Getting All Users.
 const getAllUsersStart = () => {
@@ -41,7 +41,7 @@ export const setAllUsersInit = () => {
             .catch(error => dispatch(getAllUsersFail(error)))
     };
 };
-
+//Answering Question
 const saveQuestionAnswerStart = () => {
     return { type: actionTypes.SAVE_QUESTION_ANSWER_START }
 };
@@ -51,7 +51,6 @@ const saveQuestionAnswerSuccess = () => {
 const saveQuestionAnswerFail = () => {
     return { type: actionTypes.SAVE_QUESTION_ANSWER_FAIL }
 };
-
 export const saveQuestionInit = ({ authedUser, qid, answer }) => {
     return dispatch => {
         dispatch(saveQuestionAnswerStart())
