@@ -4,6 +4,7 @@ import { ProgressBar } from 'react-bootstrap'
 import { Card, ListGroup, CardGroup, Button} from 'react-bootstrap';
 
 const fullAnswer = (props) => {
+    console.log(props)
     const { question, user } = props;
     const questionKeyId = Object.values({ ...question.id }).join('');
     const { [questionKeyId]: questionID } = user.answers;

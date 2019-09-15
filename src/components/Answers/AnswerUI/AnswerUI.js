@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {Card, Button} from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import {NavLink} from 'react-router-dom';
 
 const answerUI = (props) => {
-    const { userName, question} = props
+    const { userName, question } = props
     return (
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={props.avatar} />
@@ -12,7 +13,9 @@ const answerUI = (props) => {
                 <Card.Text>
                     optionOne - {question.optionOne.text}
                 </Card.Text>
-                <Button variant="primary" onClick={() => props.showFullAnswered(question)} >Watch Full Poll</Button>
+                <NavLink to={`/questions/${question.id}`}>
+                    <Button variant="primary" >Watch Full answer INFO</Button>
+                </NavLink>
             </Card.Body>
         </Card>
     );

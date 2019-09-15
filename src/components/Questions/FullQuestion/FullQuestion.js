@@ -4,6 +4,7 @@ import { Card, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 
 const fullQuestion = (props) => {
+
     console.log(props)
     const { question } = props
     const userName = props.allUsers.filter(user => user.id === question.author)[0].name

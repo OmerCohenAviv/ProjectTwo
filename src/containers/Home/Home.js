@@ -10,10 +10,6 @@ import UtilityRenderHome from './HomeUtility/Render'
 class Home extends Component {
     state = {
         showAnswers: false,
-        showFullPoll: false,
-        showFullAnswer: false,
-        questionShowed: '',
-        answerShowed: '',
         chooseOption: '',
         submitAnswer: false,
     };
@@ -29,16 +25,6 @@ class Home extends Component {
     //Switch Between Answered Questions/Not answered
     showAnswersHandler = () => {
         this.setState(prevState => ({ showAnswers: !prevState.showAnswers }))
-    };
-    //Showing a full poll of unanswered question after clicking
-    showFullPollHandler = (questionID) => {
-        if (!this.state.showFullPoll) {
-            this.setState({ showFullPoll: true, questionShowed: questionID })
-        };
-    };
-    //Canceling the show of a single question - returning home
-    cancelFullPollHandler = () => {
-        this.setState({ showFullPoll: false, questionID: '' })
     };
     //Choosing an option inside a poll
     chooseOptionHandler = (option) => {
@@ -56,16 +42,6 @@ class Home extends Component {
         this.props.onSetAllQuestions()
         this.setState({ submitAnswer: true, showFullPoll: false })
     };
-    //Showing Full Answered Poll 
-    showFullAnsweredHandler = (questionID) => {
-        if (!this.state.showFullAnswered) {
-            this.setState({ showFullAnswer: true, answerShowed: questionID })
-        };
-    };
-    //Canceling the full answered poll UI
-    cancelFullAnsweredHandler = () => {
-        this.setState({ showFullAnswer: false, answerShowed: '' })
-    };
 
     render() {
         let homeUI = <p>Please Log In </p>
@@ -75,22 +51,14 @@ class Home extends Component {
         if (this.props.loggedUser && !this.props.loading) {
             homeUI = (
                 <UtilityRenderHome
-                    showFullAnswer={ this.state.showFullAnswer }
                     user={ this.props.loggedUser }
                     submitAnswer={ this.state.submitAnswer }
                     allUsers={ this.props.allUsers }
                     showAnswers={ this.state.showAnswers }
-                    answerShowed={ this.state.answerShowed}
-                    questionShowed={ this.state.questionShowed }
                     answeredQuestions={ this.props.answeredQuestions }
                     notAnsweredQuestions={ this.props.notAnsweredQuestions } 
-                    showFullPoll={ this.state.showFullPoll }
                     chooseOption={ this.chooseOptionHandler}
-                    cancelFullAnswer = { this.cancelFullAnsweredHandler }
-                    showFullAnswered={ this.showFullAnsweredHandler }
-                    cancelFullPoll={ this.cancelFullPollHandler }
                     saveQuestion={ this.saveQuestionHandler }
-                    showFullPollFunc={ this.showFullPollHandler }
                     switchQA={ this.showAnswersHandler  } />
             );
         };

@@ -8,7 +8,7 @@ const displayItems = (props) => {
             <Nav.Item>
                 <NavLink to='/' className="nav-link" activeClassName='nav-link active' exact>
                     Home
-                     </NavLink>
+                </NavLink>
             </Nav.Item>
         </Nav>
     );
@@ -18,17 +18,17 @@ const displayItems = (props) => {
             <Nav.Item>
                 <NavLink to='/' className="nav-link" activeClassName='nav-link active' exact>
                     Home
-                     </NavLink>
+                 </NavLink>
             </Nav.Item>
             <Nav.Item>
                 <NavLink to='/newquestion' className="nav-link" activeClassName='nav-link active' exact>
                     New Question
-                     </NavLink>
+                 </NavLink>
             </Nav.Item>
             <Nav.Item>
                 <NavLink to='/leadersboard' className="nav-link" activeClassName='nav-link active' exact>
                     Leaders Board
-                     </NavLink>
+                 </NavLink>
             </Nav.Item>
         </Nav>
     );
