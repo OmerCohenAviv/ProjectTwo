@@ -10,11 +10,30 @@ import UtilityRenderHome from './HomeUtility/Render'
 class Home extends Component {
     state = {
         showAnswers: false,
-        chooseOption: '',
         submitAnswer: false,
+        chooseOption: '',
+        allQuestions: null
+    };
+    componentDidMount() {
+        if (this.props.allQuestions) {
+            const allQuestionsCopy = [...this.props.allQuestions]
+            this.setState({ allQuestions: allQuestionsCopy })
+        };  
     };
     componentDidUpdate() {
-        if (this.state.submitAnswer && !this.props.loading) {
+        if ( this.state.allQuestions) {
+            if (this.state.allQuestions.length !== this.props.allQuestions.length) {
+                console.log(this.props.allQuestions)
+                console.log(this.state.allQuestions)
+                const allQuestionsCopy = [...this.props.allQuestions]
+                this.setState({ allQuestions: allQuestionsCopy })
+                const userToBeLogged = this.props.allUsers.filter(user => {
+                    return user.id === this.props.loggedUser.id
+                });
+                this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
+            }
+        }
+       if ((this.state.submitAnswer && !this.props.loading)) {
             const userToBeLogged = this.props.allUsers.filter(user => {
                 return user.id === this.props.loggedUser.id
             });
@@ -51,15 +70,15 @@ class Home extends Component {
         if (this.props.loggedUser && !this.props.loading) {
             homeUI = (
                 <UtilityRenderHome
-                    user={ this.props.loggedUser }
-                    submitAnswer={ this.state.submitAnswer }
-                    allUsers={ this.props.allUsers }
-                    showAnswers={ this.state.showAnswers }
-                    answeredQuestions={ this.props.answeredQuestions }
-                    notAnsweredQuestions={ this.props.notAnsweredQuestions } 
-                    chooseOption={ this.chooseOptionHandler}
-                    saveQuestion={ this.saveQuestionHandler }
-                    switchQA={ this.showAnswersHandler  } />
+                    user={this.props.loggedUser}
+                    submitAnswer={this.state.submitAnswer}
+                    allUsers={this.props.allUsers}
+                    showAnswers={this.state.showAnswers}
+                    answeredQuestions={this.props.answeredQuestions}
+                    notAnsweredQuestions={this.props.notAnsweredQuestions}
+                    chooseOption={this.chooseOptionHandler}
+                    saveQuestion={this.saveQuestionHandler}
+                    switchQA={this.showAnswersHandler} />
             );
         };
 

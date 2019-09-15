@@ -59,3 +59,23 @@ export const saveQuestionInit = ({ authedUser, qid, answer }) => {
             .catch(error => dispatch(saveQuestionAnswerFail(error)))
     };
 };
+
+
+
+const addQuestionStart = () => {
+    return {type: actionTypes.ADD_QUESTION_START}
+};
+const addQuestionSuccess = (newQuestion) => {
+    return {type: actionTypes.ADD_QUESTION_SUCCESS, newQuestion: newQuestion}
+};
+const addQuestionFail = (error) => {
+    return {type: actionTypes.ADD_QUESTION_FAIL}
+};
+export const addQuestionInit= (questionInfo) => {
+    return dispatch => {
+        dispatch( addQuestionStart() )
+        dataAPI._saveQuestion(questionInfo)
+        .then( res => dispatch( addQuestionSuccess( res ) ) )
+        .catch( err => ( dispatch( addQuestionFail( err ) ) ) )
+    };
+};

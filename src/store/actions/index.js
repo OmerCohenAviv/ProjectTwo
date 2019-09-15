@@ -7,4 +7,6 @@ export {
     saveQuestionInit,  
     setAllUsersQuestionsInit,
     setAllUsersInit,
+    addQuestionInit,
  } from './Home'
+

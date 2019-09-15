@@ -1,6 +1,5 @@
 import React,{ Fragment } from 'react';
 
-import { Redirect } from 'react-router-dom';
 import { ProgressBar } from 'react-bootstrap'
 import { Card, ListGroup, CardGroup, Button} from 'react-bootstrap';
 

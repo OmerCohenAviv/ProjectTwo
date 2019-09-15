@@ -18,6 +18,14 @@ const HomeReducer = (state = initalState, action) => {
         case (actionTypes.GET_ALL_USERS_FAIL): {    return updateObject(state, { loading: false }) }
 
         case (actionTypes.SAVE_QUESTION_ANSWER_START): {   return (updateObject(state, {loading: true})) }
+        
+        
+        case(actionTypes.ADD_QUESTION_START): return (updateObject(state, {loading: true}))
+        case(actionTypes.ADD_QUESTION_SUCCESS):  {
+            return (updateObject(state,{ allQuestions: state.allQuestions.concat(action.newQuestion), loading:false}))
+        }
+        case(actionTypes.ADD_QUESTION_FAIL): return (updateObject(state, {loading: false}))
+        
         default: return state;
     };
 };

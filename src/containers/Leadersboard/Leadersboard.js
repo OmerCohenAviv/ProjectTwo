@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 class Leadersboard extends Component {
     render() {
         return (
@@ -8,4 +10,10 @@ class Leadersboard extends Component {
     };
 };
 
-export default Leadersboard;
+const mapStateToProps = state => {
+    return {
+        loggedUser: state.User.loggedUser
+    };
+};
+
+export default connect(mapStateToProps)(Leadersboard);

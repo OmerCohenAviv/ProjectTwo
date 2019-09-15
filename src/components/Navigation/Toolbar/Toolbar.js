@@ -10,7 +10,7 @@ const toolbar = (props) => {
     return (
         <Navbar bg="dark" variant="dark">
             <Navbar.Brand> <FontAwesomeIcon icon={faQuestionCircle} color='orange' /> </Navbar.Brand>
-            <DisplayItems />
+            <DisplayItems user={props.userStatus} />
             <LogStatus
                 name={props.userStatus ? props.userStatus.name : null} />
         </Navbar>
