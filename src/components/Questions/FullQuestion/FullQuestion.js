@@ -30,7 +30,7 @@ const fullQuestion = (props) => {
                 </Card.Text>
                 <hr />
                 <Button variant="primary" onClick={() => props.saveQuestion(question.id)} > Submit</Button>
-                <Button variant="danger" onClick={props.cancelFullPoll} >Cancel</Button>
+                <Button variant="danger"  onClick={ () => props.history.push('/') }  >Cancel</Button>
             </Card.Body>
         </Card>
     );

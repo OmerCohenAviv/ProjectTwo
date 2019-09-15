@@ -1,6 +1,7 @@
 import React,{ Fragment } from 'react';
-import { ProgressBar } from 'react-bootstrap'
 
+import { Redirect } from 'react-router-dom';
+import { ProgressBar } from 'react-bootstrap'
 import { Card, ListGroup, CardGroup, Button} from 'react-bootstrap';
 
 const fullAnswer = (props) => {
@@ -57,7 +58,7 @@ const fullAnswer = (props) => {
     return (
         <Fragment>
             {displayCard}
-            <Button variant='danger' onClick={() => props.canceled() }>GoBack</Button>
+            <Button variant='danger'  onClick={ () => props.history.push('/') } >GoBack</Button>
         </Fragment>
     );
 };

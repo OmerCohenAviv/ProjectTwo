@@ -16,8 +16,6 @@ const UtilityRenderHome = (props) => {
             render={(routeProps) => <QuestionsUI
                 {...props}
                 {...routeProps}
-                showFullAnswered={props.showFullAnswered}
-                showFullPollFunc={props.showFullPollFunc}
                 showAnswers={props.showAnswers}
                 switchQA={props.switchQA}
                 allUsers={props.allUsers}
@@ -43,7 +41,7 @@ const UtilityRenderHome = (props) => {
                 saveQuestion={props.saveQuestion}
                 allUsers={props.allUsers}
                 cancelFullPoll={props.cancelFullPoll}
-                question={props.questionShowed}
+                question={question}
             />
             }
         />
@@ -64,7 +62,6 @@ const UtilityRenderHome = (props) => {
             }
         />
     });
-    console.log(fullAnswers)
     //Spinner if loading is true.
     if (props.loading) {
         allQuestions = <Spinner animation="border" role="status" />
