@@ -26,19 +26,21 @@ class Home extends Component {
             if (this.state.allQuestions.length !== this.props.allQuestions.length) {
                 const allQuestionsCopy = [...this.props.allQuestions]
                 this.setState({ allQuestions: allQuestionsCopy })
-                const userToBeLogged = this.props.allUsers.filter(user => {
+                let userToBeLogged = this.props.allUsers.filter(user => {
                     return user.id === this.props.loggedUser.id
                 });
+                userToBeLogged = userToBeLogged[0]
                 this.setState({ allQuestions: allQuestionsCopy }, () => {
-                    this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
+                    this.props.onLoginUser(userToBeLogged.id, this.props.allQuestions, this.props.allUsers)
                 })
             }
         }
        if ((this.state.submitAnswer && !this.props.loading)) {
-            const userToBeLogged = this.props.allUsers.filter(user => {
+            let userToBeLogged = this.props.allUsers.filter(user => {
                 return user.id === this.props.loggedUser.id
             });
-            this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
+            userToBeLogged = userToBeLogged[0]
+            this.props.onLoginUser(userToBeLogged.id, this.props.allQuestions, this.props.allUsers)
             this.setState({ submitAnswer: false }, () => {
                 this.props.history.push(`/questions/${this.state.questionAnswered}`)
             })
@@ -101,7 +103,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onLoginUser: (user, allQuestions) => dispatch(actions.logInUserInit(user, allQuestions)),
+        onLoginUser: (user, allQuestions, userID) => dispatch(actions.logInUserInit(user, allQuestions, userID)),
         onSetAllUsersInit: () => dispatch(actions.setAllUsersInit()),
         onSetAllQuestions: () => dispatch(actions.setAllUsersQuestionsInit()),
         onSaveAnswerInit: (questionInfo) => dispatch(actions.saveQuestionInit(questionInfo))

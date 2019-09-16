@@ -17,10 +17,11 @@ class Login extends Component {
     };
     onLoginHandler = (event) => {
         event.preventDefault();
-        const userToBeLogged = this.props.allUsers.filter(user => {
+        let userToBeLogged = this.props.allUsers.filter(user => {
             return user.id === this.state.user
         });
-        this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
+        userToBeLogged = userToBeLogged[0]
+        this.props.onLoginUser(userToBeLogged.id, this.props.allQuestions, this.props.allUsers)
     };
 
     render() {
@@ -50,7 +51,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return { onLoginUser: (user, allQuestions) => dispatch(actions.logInUserInit(user, allQuestions)) };
+    return { onLoginUser: (user, allQuestions, allUsers) => dispatch(actions.logInUserInit(user, allQuestions, allUsers)) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

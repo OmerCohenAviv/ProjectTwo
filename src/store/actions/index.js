@@ -1,4 +1,5 @@
 export {
+    autoLoginInit,
     logOutUserInit,
     logInUserInit,
  } from './User';

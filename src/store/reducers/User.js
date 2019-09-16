@@ -5,7 +5,8 @@ const initalState = {
     notAnsweredQuestions: [],
     answeredQuestions: [],
     loggedUser: null,
-    loading: false
+    loading: false,
+    token: null
 };
 
 const UserReducer = (state = initalState, action) => {
@@ -15,13 +16,14 @@ const UserReducer = (state = initalState, action) => {
             const answered = Object.keys(action.user.answers)
             const answeredQuestions = action.allQuestions.filter(q => answered.includes(q.id))
             const notAnsweredQuestions = action.allQuestions.filter(q => !answered.includes(q.id))
-            return updateObject(state, { loggedUser: action.user, notAnsweredQuestions: notAnsweredQuestions, answeredQuestions: answeredQuestions })
+            localStorage.setItem('token', action.user.id);
+            return updateObject(state, { loggedUser: action.user, notAnsweredQuestions: notAnsweredQuestions, answeredQuestions: answeredQuestions, token:action.token })
         }
         //Logging out.
-        case (actionTypes.LOGOUT_USER): { 
+        case (actionTypes.LOGOUT_USER): {
+            localStorage.removeItem('token')
             return updateObject(state, { loggedUser: null }) 
         }
-
         default: return state;
     };
 };

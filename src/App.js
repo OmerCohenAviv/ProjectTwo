@@ -14,9 +14,16 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 
 class App extends Component {
   componentDidMount() {
-    this.props.onGetAllUsersInit()
-    this.props.onSetAllQuestions()
-  };
+      this.props.onGetAllUsersInit()
+      this.props.onSetAllQuestions()
+      }
+  componentDidUpdate() {
+    console.log(this.props.allUsers)
+    if(!this.props.loggedUser && this.props.allQuestions && this.props.allUsers) {
+      console.log('token')
+      this.props.onAutoLogin(this.props.allQuestions,this.props.allUsers)
+    }
+  }
   render() {
     let routes = (
       <Switch>
@@ -34,7 +41,6 @@ class App extends Component {
           <Route path='/leaderboard' component={Leadersboard} exact />
           <Route path='/add' component={NewQuestion} exact />
           <Route path='/questions/:id' component={Home} exact />
-          <Route path='/questions/:id' component={NewQuestion} />
           <Route path='/' component={Home} exact />
           <Redirect to='/' />
         </Switch>
@@ -47,16 +53,19 @@ class App extends Component {
     );
   };
 };
-
 const mapStateToProps = state => {
   return {
+    token: state.User.token,
     loggedUser: state.User.loggedUser,
+    allQuestions: state.Home.allQuestions,
+    allUsers: state.Home.allUsers,
     unAnsweredQuestions: state.User.unAnsweredQuestions,
     answeredQuestions: state.User.answeredQuestions
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
+    onAutoLogin: (allQuestions,allUsers) => dispatch(actions.autoLoginInit(allQuestions,allUsers)),
     onGetAllUsersInit: () => dispatch(actions.setAllUsersInit()),
     onSetAllQuestions: () => dispatch(actions.setAllUsersQuestionsInit())
   };
