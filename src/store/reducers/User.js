@@ -10,13 +10,18 @@ const initalState = {
 
 const UserReducer = (state = initalState, action) => {
     switch (action.type) {
+        //Loggin and filtering answeredQuestions and not answered Questions
         case (actionTypes.LOGIN_USER): {
             const answered = Object.keys(action.user.answers)
-            const answeredQuestions =    action.allQuestions.filter(q => answered.includes(q.id))
+            const answeredQuestions = action.allQuestions.filter(q => answered.includes(q.id))
             const notAnsweredQuestions = action.allQuestions.filter(q => !answered.includes(q.id))
-            return updateObject(state, { loggedUser: action.user, notAnsweredQuestions: notAnsweredQuestions, answeredQuestions: answeredQuestions})
+            return updateObject(state, { loggedUser: action.user, notAnsweredQuestions: notAnsweredQuestions, answeredQuestions: answeredQuestions })
         }
-        case (actionTypes.LOGOUT_USER): { return updateObject(state, { loggedUser: null }) }
+        //Logging out.
+        case (actionTypes.LOGOUT_USER): { 
+            return updateObject(state, { loggedUser: null }) 
+        }
+
         default: return state;
     };
 };

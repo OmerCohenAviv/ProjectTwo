@@ -14,6 +14,8 @@ const fullQuestion = (props) => {
             <Card.Body>
                 <Card.Title> Asked By - {userName} </Card.Title>
                 <Card.Text as='div'>
+                    <p>Would you rather</p>
+                    <hr/>
                     <Button
                         style={{ color: 'white' }}
                         variant='outline-warning'

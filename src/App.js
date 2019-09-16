@@ -1,4 +1,4 @@
-import React, { Component  } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
 import { connect } from 'react-redux'
@@ -9,28 +9,37 @@ import Layout from './hoc/Layout/Layout';
 import Leadersboard from './containers/Leadersboard/Leadersboard';
 import NewQuestion from './containers/NewQuestion/NewQuestion';
 import * as actions from './store/actions/index';
-import { Route, Switch} from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 
-class  App extends Component  {
+class App extends Component {
   componentDidMount() {
     this.props.onGetAllUsersInit()
     this.props.onSetAllQuestions()
   };
-  render () {
-    if (this.props.unAnsweredQuestions && this.props.answeredQuestions) {
-
-    } 
-    const routes = (
+  render() {
+    let routes = (
       <Switch>
-        <Route path='/login' component={Login}  exact/>
-        <Route path='/logout' component={Logout}  exact/>
-        <Route path='/leadersboard' component={Leadersboard} exact />
-        <Route path='/newquestion' component={NewQuestion} exact />
+        <Route path='/login' component={Login} exact />
         <Route path='/' component={Home} exact />
-        <Route path='/questions/:id' component={Home} exact />
+        <Redirect to='/' />
       </Switch>
-    );
+
+    )
+    if (this.props.loggedUser) {
+      routes = (
+        <Switch>
+          <Route path='/login' component={Login} exact />
+          <Route path='/logout' component={Logout} exact />
+          <Route path='/leaderboard' component={Leadersboard} exact />
+          <Route path='/add' component={NewQuestion} exact />
+          <Route path='/questions/:id' component={Home} exact />
+          <Route path='/questions/:id' component={NewQuestion} />
+          <Route path='/' component={Home} exact />
+          <Redirect to='/' />
+        </Switch>
+      );
+    }
     return (
       <Layout>
         {routes}
@@ -41,14 +50,15 @@ class  App extends Component  {
 
 const mapStateToProps = state => {
   return {
+    loggedUser: state.User.loggedUser,
     unAnsweredQuestions: state.User.unAnsweredQuestions,
     answeredQuestions: state.User.answeredQuestions
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-      onGetAllUsersInit: () => dispatch( actions.setAllUsersInit() ),
-      onSetAllQuestions: () => dispatch(actions.setAllUsersQuestionsInit())
+    onGetAllUsersInit: () => dispatch(actions.setAllUsersInit()),
+    onSetAllQuestions: () => dispatch(actions.setAllUsersQuestionsInit())
   };
 };
 

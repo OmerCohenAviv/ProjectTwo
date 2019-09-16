@@ -21,12 +21,12 @@ const displayItems = (props) => {
                      </NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                    <NavLink to='/newquestion' className="nav-link" activeClassName='nav-link active' exact>
+                    <NavLink to='/add' className="nav-link" activeClassName='nav-link active' exact>
                         New Question
                      </NavLink>
                 </Nav.Item>
                 <Nav.Item>
-                    <NavLink to='/leadersboard' className="nav-link" activeClassName='nav-link active' exact>
+                    <NavLink to='/leaderboard' className="nav-link" activeClassName='nav-link active' exact>
                         Leaders Board
                      </NavLink>
                 </Nav.Item>

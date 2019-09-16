@@ -12,7 +12,8 @@ class Home extends Component {
         showAnswers: false,
         submitAnswer: false,
         chooseOption: '',
-        allQuestions: null
+        allQuestions: null,
+        questionAnswered: null
     };
     componentDidMount() {
         if (this.props.allQuestions) {
@@ -23,14 +24,14 @@ class Home extends Component {
     componentDidUpdate() {
         if ( this.state.allQuestions) {
             if (this.state.allQuestions.length !== this.props.allQuestions.length) {
-                console.log(this.props.allQuestions)
-                console.log(this.state.allQuestions)
                 const allQuestionsCopy = [...this.props.allQuestions]
                 this.setState({ allQuestions: allQuestionsCopy })
                 const userToBeLogged = this.props.allUsers.filter(user => {
                     return user.id === this.props.loggedUser.id
                 });
-                this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
+                this.setState({ allQuestions: allQuestionsCopy }, () => {
+                    this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
+                })
             }
         }
        if ((this.state.submitAnswer && !this.props.loading)) {
@@ -38,7 +39,9 @@ class Home extends Component {
                 return user.id === this.props.loggedUser.id
             });
             this.props.onLoginUser(...userToBeLogged, this.props.allQuestions)
-            this.setState({ submitAnswer: false })
+            this.setState({ submitAnswer: false }, () => {
+                this.props.history.push(`/questions/${this.state.questionAnswered}`)
+            })
         };
     };
     //Switch Between Answered Questions/Not answered
@@ -59,7 +62,7 @@ class Home extends Component {
         this.props.onSaveAnswerInit(questionInfo)
         this.props.onSetAllUsersInit()
         this.props.onSetAllQuestions()
-        this.setState({ submitAnswer: true, showFullPoll: false })
+        this.setState({ submitAnswer: true,  questionAnswered: qID })
     };
 
     render() {

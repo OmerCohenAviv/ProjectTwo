@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
@@ -57,19 +57,23 @@ class NewQuestion extends Component {
     render() {
 
         return (
-            <NewQuestionUI
+            <Fragment>
+                <h1>Would you rather</h1>
+                <NewQuestionUI
                 changed={this.changeOptionValueHandler}
                 optionOne={this.state.optionOne.value}
                 optionTwo={this.state.optionTwo.value}
                 isValid={this.state.validForm}
                 submit={this.submitFormHandler} />
+            </Fragment>
+
         );
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-    onAddQuestion:  (questionInfo) => dispatch(actions.addQuestionInit(questionInfo) )
+        onAddQuestion: (questionInfo) => dispatch(actions.addQuestionInit(questionInfo))
     };
 };
 

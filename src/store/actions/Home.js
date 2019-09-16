@@ -21,7 +21,6 @@ export const setAllUsersQuestionsInit = () => {
     };
 };
 
-
 //Getting All Users.
 const getAllUsersStart = () => {
     return { type: actionTypes.GET_ALL_USERS_START };
@@ -40,7 +39,8 @@ export const setAllUsersInit = () => {
             .then(users => dispatch(getAllUsersSuccess(users)))
             .catch(error => dispatch(getAllUsersFail(error)))
     };
-};
+}; 
+
 //Answering Question
 const saveQuestionAnswerStart = () => {
     return { type: actionTypes.SAVE_QUESTION_ANSWER_START }
@@ -60,8 +60,7 @@ export const saveQuestionInit = ({ authedUser, qid, answer }) => {
     };
 };
 
-
-
+//Adding a Question
 const addQuestionStart = () => {
     return {type: actionTypes.ADD_QUESTION_START}
 };

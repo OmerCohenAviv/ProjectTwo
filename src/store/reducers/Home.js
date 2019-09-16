@@ -9,23 +9,44 @@ const initalState = {
 
 const HomeReducer = (state = initalState, action) => {
     switch (action.type) {
-        case (actionTypes.SET_ALL_USERS_QUESTIONS_START): { return   updateObject(state, { loading: true }) }
-        case (actionTypes.SET_ALL_USERS_QUESTIONS_SUCCESS): { return updateObject(state, { allQuestions: Object.values(action.questions), loading: false }) }
-        case (actionTypes.SET_ALL_USERS_QUESTIONS_FAIL): { return    updateObject(state, { loading: false }) }
-
-        case (actionTypes.GET_ALL_USERS_START): {   return updateObject(state, { loading: true }) }
-        case (actionTypes.GET_ALL_USERS_SUCCESS): { return updateObject(state, { allUsers: action.users }) }
-        case (actionTypes.GET_ALL_USERS_FAIL): {    return updateObject(state, { loading: false }) }
-
-        case (actionTypes.SAVE_QUESTION_ANSWER_START): {   return (updateObject(state, {loading: true})) }
-        
-        
-        case(actionTypes.ADD_QUESTION_START): return (updateObject(state, {loading: true}))
-        case(actionTypes.ADD_QUESTION_SUCCESS):  {
-            return (updateObject(state,{ allQuestions: state.allQuestions.concat(action.newQuestion), loading:false}))
+        //Getting all Questions
+        case (actionTypes.SET_ALL_USERS_QUESTIONS_START): {
+            return updateObject(state, { loading: true })
         }
-        case(actionTypes.ADD_QUESTION_FAIL): return (updateObject(state, {loading: false}))
-        
+        case (actionTypes.SET_ALL_USERS_QUESTIONS_SUCCESS): {
+            const allQuestionsSorted = Object.values(action.questions).sort((a, b) => {
+                return a.timestamp - b.timestamp
+            });
+            return updateObject(state, { allQuestions: allQuestionsSorted.reverse(), loading: false })
+        }
+        case (actionTypes.SET_ALL_USERS_QUESTIONS_FAIL): {
+            return updateObject(state, { loading: false })
+        }
+
+
+        //Getting all Users
+        case (actionTypes.GET_ALL_USERS_START): {
+            return updateObject(state, { loading: true })
+        }
+        case (actionTypes.GET_ALL_USERS_SUCCESS): {
+            return updateObject(state, { allUsers: action.users })
+        }
+        case (actionTypes.GET_ALL_USERS_FAIL): {
+            return updateObject(state, { loading: false })
+        } 
+
+
+        //Saving new Question
+        case (actionTypes.SAVE_QUESTION_ANSWER_START): {
+            return updateObject(state, { loading: true })
+        }
+        case (actionTypes.ADD_QUESTION_START): return (updateObject(state, { loading: true }))
+        case (actionTypes.ADD_QUESTION_SUCCESS): {
+            const updateAllQuestions = [action.newQuestion, ...state.allQuestions]
+            return updateObject(state, { allQuestions: updateAllQuestions, loading: false })
+        }
+        case (actionTypes.ADD_QUESTION_FAIL): return updateObject(state, { loading: false })
+
         default: return state;
     };
 };
