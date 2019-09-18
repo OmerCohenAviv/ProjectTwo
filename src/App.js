@@ -18,9 +18,7 @@ class App extends Component {
       this.props.onSetAllQuestions()
       }
   componentDidUpdate() {
-    console.log(this.props.allUsers)
     if(!this.props.loggedUser && this.props.allQuestions && this.props.allUsers) {
-      console.log('token')
       this.props.onAutoLogin(this.props.allQuestions,this.props.allUsers)
     }
   }

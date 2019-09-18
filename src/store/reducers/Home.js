@@ -22,14 +22,12 @@ const HomeReducer = (state = initalState, action) => {
         case (actionTypes.SET_ALL_USERS_QUESTIONS_FAIL): {
             return updateObject(state, { loading: false })
         }
-
-
         //Getting all Users
         case (actionTypes.GET_ALL_USERS_START): {
             return updateObject(state, { loading: true })
         }
         case (actionTypes.GET_ALL_USERS_SUCCESS): {
-            return updateObject(state, { allUsers: action.users })
+            return updateObject(state, { allUsers: action.users, loading: false})
         }
         case (actionTypes.GET_ALL_USERS_FAIL): {
             return updateObject(state, { loading: false })

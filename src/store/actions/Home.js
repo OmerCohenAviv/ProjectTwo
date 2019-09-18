@@ -74,7 +74,11 @@ export const addQuestionInit= (questionInfo) => {
     return dispatch => {
         dispatch( addQuestionStart() )
         dataAPI._saveQuestion(questionInfo)
-        .then( res => dispatch( addQuestionSuccess( res ) ) )
+        .then( res => {
+            dispatch(addQuestionSuccess(res))
+            dispatch( setAllUsersInit() )
+            dispatch( setAllUsersQuestionsInit()) 
+        })
         .catch( err => ( dispatch( addQuestionFail( err ) ) ) )
     };
 };

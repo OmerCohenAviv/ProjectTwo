@@ -1,4 +1,4 @@
-import * as dataAPI from '../../DataBase';
+
 import * as actionTypes from './actionTypes';
 
 
@@ -23,21 +23,3 @@ export const autoLoginInit = (allQuestions, allUsers) => {
     };
 };
 
-
-const saveQuestionAnswerStart = () => {
-    return { type: actionTypes.SAVE_QUESTION_ANSWER_START }
-};
-const saveQuestionAnswerSuccess = () => {
-    return { type: actionTypes.SAVE_QUESTION_ANSWER_SUCCESS }
-};
-const saveQuestionAnswerFail = () => {
-    return { type: actionTypes.SAVE_QUESTION_ANSWER_FAIL }
-};
-export const saveQuestionInit = ({ authedUser, qid, answer }) => {
-    return dispatch => {
-        dispatch(saveQuestionAnswerStart())
-        dataAPI._saveQuestionAnswer({ authedUser, qid, answer })
-            .then(response => dispatch(saveQuestionAnswerSuccess()))
-            .catch(error => dispatch(saveQuestionAnswerFail(error)))
-    };
-};

@@ -13,17 +13,20 @@ class Home extends Component {
         submitAnswer: false,
         chooseOption: '',
         allQuestions: null,
+        allUsers: null,
         questionAnswered: null
     };
     componentDidMount() {
         if (this.props.allQuestions) {
             const allQuestionsCopy = [...this.props.allQuestions]
-            this.setState({ allQuestions: allQuestionsCopy })
+            const allUsersCopy = [...this.props.allUsers]
+            this.setState({ allQuestions: allQuestionsCopy, allUsers: allUsersCopy})
         };  
     };
     componentDidUpdate() {
         if ( this.state.allQuestions) {
-            if (this.state.allQuestions.length !== this.props.allQuestions.length) {
+            if ((JSON.stringify(this.state.allQuestions) !== JSON.stringify(this.props.allQuestions) )) {
+                console.log('hey')
                 const allQuestionsCopy = [...this.props.allQuestions]
                 this.setState({ allQuestions: allQuestionsCopy })
                 let userToBeLogged = this.props.allUsers.filter(user => {

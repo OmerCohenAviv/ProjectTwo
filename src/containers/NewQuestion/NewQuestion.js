@@ -50,7 +50,7 @@ class NewQuestion extends Component {
             optionTwoText: this.state.optionTwo.value,
             author: this.props.loggedUser.id
         }
-        this.props.onAddQuestion(questionInfo)
+        this.props.onAddQuestion(questionInfo, this.props.onGetAllUsers)
         this.props.history.push('/')
     };
 
@@ -73,7 +73,8 @@ class NewQuestion extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddQuestion: (questionInfo) => dispatch(actions.addQuestionInit(questionInfo))
+        onAddQuestion: (questionInfo, getAllUsers ) => dispatch(actions.addQuestionInit(questionInfo, getAllUsers)),
+        onGetAllUsers: () => dispatch(actions.setAllUsersInit())
     };
 };
 
