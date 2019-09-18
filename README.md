@@ -4,15 +4,18 @@ Running the app do the following ->
 1. npm install (Installing all deps)
 2. npm run (to launch the app)
 
-this application allows you to do answer/ask a question 
-that has two results and let other users answer you'r question
-and let you answer other useres questions 
-answering/asking questions will grant u points 
-u can see the leaderboard of points in the leaderboard in the navigation.
+App ->  Would you rather ? 
+Logged in users abe able to answer questions of other users. 
+Logged in useres are able to create new questions.
+Logged in users can see the leaderboard Page.
 
+App -> 
+Home Page - By default u can see all the UNanswered questions of you'r user.
+you can switch to view the questions you have answered by clicking Answered Questions
+Creating new Question - navigate to the creating new question, select to options and then submit it.
+LeaderBoard - Displaying all the users, and there score.
 
-U most be logged in to see to navigate inside the application 
- log in into a user in the Login page and select a user from there.
+to log out and swtich a user click the logout button.
  
 ENJOY
 =======
