@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Running the app do the following ->
 1. npm install (Installing all deps)
@@ -14,3 +15,6 @@ U most be logged in to see to navigate inside the application
  log in into a user in the Login page and select a user from there.
  
 ENJOY
+=======
+https://wouldyouratherdo.firebaseapp.com/
+>>>>>>> c6060f9cb92168c63fe399df69da05d91635f0a6
