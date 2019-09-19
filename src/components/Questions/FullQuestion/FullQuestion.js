@@ -8,9 +8,10 @@ const fullQuestion = (props) => {
     console.log(props)
     const { question } = props
     const userName = props.allUsers.filter(user => user.id === question.author)[0].name
+    const userAvatar= props.allUsers.filter(user => user.id === question.author)[0].avatarURL
     let fullQuestion = (
         <Card bg='info' text='white' style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={props.user.avatarURL} />
+            <Card.Img variant="top" src={userAvatar} />
             <Card.Body>
                 <Card.Title> Asked By - {userName} </Card.Title>
                 <Card.Text as='div'>
