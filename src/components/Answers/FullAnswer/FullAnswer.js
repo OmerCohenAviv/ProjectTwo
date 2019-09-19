@@ -23,7 +23,6 @@ const fullAnswer = (props) => {
                 <Card.Img variant="top" src={getAvatar} />
             </Card>
             <Card style={{ width: '18rem' }} bg="success" text="white" >
-                <Card.Img variant="top" src={getAvatar} />
                 <Card.Header>Option One - {question.optionOne.text}</Card.Header>
                 <ListGroup variant="flush" style={{ color: 'black' }}>
                     <ListGroup.Item>Number of people voted for this - {question.optionOne.votes.length} out of {numberOfVotes}</ListGroup.Item>
