@@ -2,7 +2,7 @@
 
 Running the app do the following ->
 1. npm install (Installing all deps)
-2. npm run (to launch the app)
+2. npm start (to launch the app)
 
 App ->  Would you rather ? 
 Logged in users abe able to answer questions of other users. 
