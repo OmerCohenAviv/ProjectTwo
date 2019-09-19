@@ -27,7 +27,7 @@ class App extends Component {
       <Switch>
         <Route path='/login' component={Login} exact />
         <Route path='/' component={Home} exact />
-        <Redirect to='/' />
+        <Route render={() => <h2>404 page not found :( </h2> } />
       </Switch>
 
     )
@@ -40,7 +40,7 @@ class App extends Component {
           <Route path='/add' component={NewQuestion} exact />
           <Route path='/questions/:id' component={Home} exact />
           <Route path='/' component={Home} exact />
-          <Redirect to='/' />
+          <Route render={() => <h2>404 page not found :( </h2> } />
         </Switch>
       );
     }

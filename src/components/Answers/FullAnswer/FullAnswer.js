@@ -1,10 +1,9 @@
-import React,{ Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 import { ProgressBar } from 'react-bootstrap'
-import { Card, ListGroup, CardGroup, Button} from 'react-bootstrap';
+import { Card, ListGroup, CardGroup, Button } from 'react-bootstrap';
 
 const fullAnswer = (props) => {
-    console.log(props)
     const { question, user } = props;
     const questionKeyId = Object.values({ ...question.id }).join('');
     const { [questionKeyId]: questionID } = user.answers;
@@ -13,11 +12,20 @@ const fullAnswer = (props) => {
     const progressPrecent = numberOfVotes * 100;
     const optionOnePrecent = ((question.optionOne.votes.length * 100) / progressPrecent * 100).toFixed();
     const optionTwoPrecent = ((question.optionTwo.votes.length * 100) / progressPrecent * 100).toFixed();
+    let getAvatar = props.allUsers.filter(user => {
+        return user.id === question.author
+    });
+    getAvatar = getAvatar[0].avatarURL
+    console.log(getAvatar)
     let displayCard = (
         <CardGroup>
+            <Card>
+                <Card.Img variant="top" src={getAvatar} />
+            </Card>
             <Card style={{ width: '18rem' }} bg="success" text="white" >
+                <Card.Img variant="top" src={getAvatar} />
                 <Card.Header>Option One - {question.optionOne.text}</Card.Header>
-                <ListGroup variant="flush" style={{color:'black'}}>
+                <ListGroup variant="flush" style={{ color: 'black' }}>
                     <ListGroup.Item>Number of people voted for this - {question.optionOne.votes.length} out of {numberOfVotes}</ListGroup.Item>
                     <ListGroup.Item> <ProgressBar now={optionOnePrecent} label={`${optionOnePrecent}%`} /> </ListGroup.Item>
                 </ListGroup>
@@ -36,6 +44,9 @@ const fullAnswer = (props) => {
     if (pickedQuestion === 'optionTwo') {
         displayCard = (
             <CardGroup>
+                <Card>
+                    <Card.Img variant="top" src={getAvatar} />
+                </Card>
                 <Card style={{ width: '18rem' }} >
                     <Card.Header>Option One - {question.optionOne.text}</Card.Header>
                     <ListGroup variant="flush">
@@ -45,7 +56,7 @@ const fullAnswer = (props) => {
                 </Card>
                 <Card style={{ width: '18rem' }} bg="success" text="white">
                     <Card.Header>Option Two - {question.optionTwo.text}</Card.Header>
-                    <ListGroup variant="flush" style={{color:'black'}}>
+                    <ListGroup variant="flush" style={{ color: 'black' }}>
                         <ListGroup.Item>Number of people voted for this - {question.optionTwo.votes.length} out of {numberOfVotes}  </ListGroup.Item>
                         <ListGroup.Item><ProgressBar now={optionTwoPrecent} label={`${optionTwoPrecent}%`} /></ListGroup.Item>
                     </ListGroup>
@@ -57,7 +68,7 @@ const fullAnswer = (props) => {
     return (
         <Fragment>
             {displayCard}
-            <Button variant='danger'  onClick={ () => props.history.push('/') } >GoBack</Button>
+            <Button variant='danger' onClick={() => props.history.push('/')} >GoBack</Button>
         </Fragment>
     );
 };
