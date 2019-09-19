@@ -5,8 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const questionUI = (props) => {
-    const { userName, question } = props
-
+    const { userName, el } = props
     return (
         <Fragment>
             <Card style={{ width: '18rem' }}>
@@ -14,9 +13,9 @@ const questionUI = (props) => {
                 <Card.Body>
                     <Card.Title> Asked By - {userName} </Card.Title>
                     <Card.Text>
-                        optionOne - {question.optionOne.text}
+                        optionOne - {el.optionOne.text}
                     </Card.Text>
-                    <NavLink to={`/questions/${question.id}`}>
+                    <NavLink to={`/questions/${el.id}`}>
                         <Button variant="primary" >Watch Full question</Button>
                     </NavLink>
                 </Card.Body>

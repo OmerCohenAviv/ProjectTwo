@@ -5,7 +5,8 @@ import { Card, Button, Form } from 'react-bootstrap'
 const loginUI = (props) => {
     const { allUsers } = props
     let displayUsers = []
-    for (let user of allUsers) {
+    let user;
+    for (user of allUsers) {
         displayUsers.push(user)
     };
     displayUsers = displayUsers.map(user => {
