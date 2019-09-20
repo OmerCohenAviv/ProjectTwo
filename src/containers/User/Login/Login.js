@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import LoginUI from '../../../components/User/Login/LoginUI';
 import * as actions from '../../../store/actions/index';
 import { Spinner } from 'react-bootstrap'
@@ -35,7 +34,7 @@ class Login extends Component {
                     allUsers={this.props.allUsers} />
             );
         };
-        if (this.props.loggedUser) { displayLogin = <Redirect to='/' /> }
+        if (this.props.loggedUser) { displayLogin = this.props.history.goBack() }
 
         return <div> {displayLogin} </div> 
     };

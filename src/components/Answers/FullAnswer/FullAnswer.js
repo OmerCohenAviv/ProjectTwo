@@ -66,6 +66,7 @@ const fullAnswer = (props) => {
 
     return (
         <Fragment>
+            <h1>Would you rather</h1>
             {displayCard}
             <Button variant='danger' onClick={() => props.history.push('/')} >GoBack</Button>
         </Fragment>
