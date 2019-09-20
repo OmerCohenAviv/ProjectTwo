@@ -17,7 +17,7 @@ LeaderBoard - Displaying all the users, and there score.
 
 to log out and swtich a user click the logout button.
  
-ENJOY
+ENJOY.
 =======
 https://wouldyouratherdo.firebaseapp.com/
 >>>>>>> c6060f9cb92168c63fe399df69da05d91635f0a6
